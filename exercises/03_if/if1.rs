@@ -1,9 +1,28 @@
+/*
+    Hint
+    It's possible to do this in one line if you would like!
+
+    Some similar examples from other languages:
+    - In C(++) this would be: `a > b ? a : b`
+    - In Python this would be:  `a if a > b else b`
+
+    Remember in Rust that:
+    - The `if` condition does not need to be surrounded by parentheses
+    - `if`/`else` conditionals are expressions
+    - Each condition is followed by a `{}` block
+*/
+
 fn bigger(a: i32, b: i32) -> i32 {
     // TODO: Complete this function to return the bigger number!
     // If both numbers are equal, any of them can be returned.
     // Do not use:
     // - another function call
     // - additional variables
+    if a > b {
+        a
+    } else {
+        b
+    }
 }
 
 fn main() {
