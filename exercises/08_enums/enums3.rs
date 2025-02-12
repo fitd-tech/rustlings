@@ -1,3 +1,13 @@
+/*
+    Hint
+    As a first step, define enums to compile the code without errors.
+
+    Then, create a match expression in `process()`.
+
+    Note that you need to deconstruct some message variants in the match expression
+    to get the variant's values.
+*/
+
 struct Point {
     x: u64,
     y: u64,
@@ -46,6 +56,13 @@ impl State {
     fn process(&mut self, message: Message) {
         // TODO: Create a match expression to process the different message
         // variants using the methods defined above.
+        match message {
+            Message::Resize { width, height } => self.resize(width, height),
+            Message::Move(point) => self.move_position(point),
+            Message::Echo(echo) => self.echo(echo),
+            Message::ChangeColor(red, green, blue) => self.change_color(red, green, blue),
+            Message::Quit => self.quit()
+        }
     }
 }
 

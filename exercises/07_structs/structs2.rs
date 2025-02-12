@@ -1,3 +1,13 @@
+/*
+    Hint
+    Creating instances of structs is easy, all you need to do is assign some values
+    to its fields.
+
+    There are however some shortcuts that can be taken when instantiating structs.
+    Have a look in The Book to find out more:
+    https://doc.rust-lang.org/book/ch05-01-defining-structs.html#creating-instances-from-other-instances-with-struct-update-syntax
+*/
+
 #[derive(Debug)]
 struct Order {
     name: String,
@@ -35,6 +45,11 @@ mod tests {
 
         // TODO: Create your own order using the update syntax and template above!
         // let your_order =
+        let your_order = Order {
+            name: String::from("Hacker in Rust"),
+            count: order_template.count + 1,
+            ..order_template
+        };
 
         assert_eq!(your_order.name, "Hacker in Rust");
         assert_eq!(your_order.year, order_template.year);
