@@ -4,16 +4,26 @@
 // types of fruits (e.g. apple, banana, mango) in the basket and the total count
 // of all the fruits should be at least 5.
 
+/*
+    Hint
+    The number of fruits should be at least 5 and you have to put at least 3
+    different types of fruits.
+*/
+
 use std::collections::HashMap;
 
 fn fruit_basket() -> HashMap<String, u32> {
     // TODO: Declare the hash map.
     // let mut basket =
+    let mut basket = HashMap::new();
 
     // Two bananas are already given for you :)
     basket.insert(String::from("banana"), 2);
 
     // TODO: Put more fruits in your basket.
+
+    basket.insert(String::from("mango"), 5);
+    basket.insert(String::from("orange"), 1);
 
     basket
 }

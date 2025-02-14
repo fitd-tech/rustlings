@@ -8,6 +8,14 @@
 // to insert any more of the fruits that are already in the basket (Apple,
 // Mango, and Lychee).
 
+/*
+    Hint
+    Use the `entry()` and `or_insert()` methods of `HashMap` to achieve this.
+
+    Learn more in The Book:
+    https://doc.rust-lang.org/book/ch08-03-hash-maps.html#only-inserting-a-value-if-the-key-has-no-value
+*/
+
 use std::collections::HashMap;
 
 #[derive(Hash, PartialEq, Eq, Debug)]
@@ -32,6 +40,7 @@ fn fruit_basket(basket: &mut HashMap<Fruit, u32>) {
         // TODO: Insert new fruits if they are not already present in the
         // basket. Note that you are not allowed to put any type of fruit that's
         // already present!
+        basket.entry(fruit).or_insert(10);
     }
 }
 
