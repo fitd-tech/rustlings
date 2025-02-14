@@ -31,7 +31,12 @@ fn build_scores_table(results: &str) -> HashMap<&str, TeamScores> {
     // The name of the team is the key and its associated struct is the value.
     let mut scores = HashMap::<&str, TeamScores>::new();
 
-    fn update_scores<'a>(mut scores: HashMap<&'a str, TeamScores>, team_name: &'a str, team_score: u8, opponent_score: u8) -> HashMap<&'a str, TeamScores> {
+    fn update_scores<'a>(
+        mut scores: HashMap<&'a str, TeamScores>,
+        team_name: &'a str,
+        team_score: u8,
+        opponent_score: u8,
+    ) -> HashMap<&'a str, TeamScores> {
         let entry = scores.entry(team_name).or_default();
         entry.goals_scored += team_score;
         entry.goals_conceded += opponent_score;
@@ -60,13 +65,18 @@ fn build_scores_table(results: &str) -> HashMap<&str, TeamScores> {
         // let team_1_entry = scores.entry(team_1_name).or_default();
         // team_1_entry.goals_scored += team_1_score;
         // team_1_entry.goals_conceded += team_2_score;
-        
+
         // let team_2_entry = scores.entry(team_2_name).or_default();
         // team_2_entry.goals_scored += team_2_score;
         // team_2_entry.goals_conceded += team_1_score;
 
         let team_1_updated_scores = update_scores(scores, team_1_name, team_1_score, team_2_score);
-        let team_2_updated_scores = update_scores(team_1_updated_scores, team_2_name, team_2_score, team_1_score);
+        let team_2_updated_scores = update_scores(
+            team_1_updated_scores,
+            team_2_name,
+            team_2_score,
+            team_1_score,
+        );
 
         scores = team_2_updated_scores;
     }

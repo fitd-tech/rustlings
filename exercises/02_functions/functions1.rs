@@ -10,7 +10,7 @@
 
 fn main() {
     fn call_me() {
-        return
+        return;
     }
     call_me(); // Don't change this line
 }

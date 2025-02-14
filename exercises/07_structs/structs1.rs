@@ -1,4 +1,4 @@
-/* 
+/*
     Hint
     Rust has more than one type of struct. Three actually, all variants are used to
     package related data together.
@@ -25,7 +25,9 @@ struct ColorRegularStruct {
 
 struct ColorTupleStruct(
     /* TODO: Add the fields that the test `tuple_structs` expects */
-    u8, u8, u8
+    u8,
+    u8,
+    u8,
 );
 
 #[derive(Debug)]

@@ -1,4 +1,4 @@
-/* 
+/*
     Hint
     The compiler is informing us that we've got the name of the print macro wrong.
     It also suggests an alternative.
