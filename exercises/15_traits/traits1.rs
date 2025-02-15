@@ -1,3 +1,11 @@
+/*
+    Hint
+    More about traits in The Book:
+    https://doc.rust-lang.org/book/ch10-02-traits.html
+
+    The `+` operator can concatenate a `String` with a `&str`.
+*/
+
 // The trait `AppendBar` has only one function which appends "Bar" to any object
 // implementing this trait.
 trait AppendBar {
@@ -6,6 +14,9 @@ trait AppendBar {
 
 impl AppendBar for String {
     // TODO: Implement `AppendBar` for the type `String`.
+    fn append_bar(self) -> Self {
+        self + "Bar"
+    }
 }
 
 fn main() {

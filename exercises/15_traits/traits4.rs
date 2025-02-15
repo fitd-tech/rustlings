@@ -1,3 +1,12 @@
+/*
+    Hint
+    Instead of using concrete types as parameters you can use traits. Try replacing
+    `???` with `impl [what goes here?]`.
+
+    Related section in The Book:
+    https://doc.rust-lang.org/book/ch10-02-traits.html#traits-as-parameters
+*/
+
 trait Licensed {
     fn licensing_info(&self) -> String {
         "Default license".to_string()
@@ -11,7 +20,7 @@ impl Licensed for SomeSoftware {}
 impl Licensed for OtherSoftware {}
 
 // TODO: Fix the compiler error by only changing the signature of this function.
-fn compare_license_types(software1: ???, software2: ???) -> bool {
+fn compare_license_types(software1: impl Licensed, software2: impl Licensed) -> bool {
     software1.licensing_info() == software2.licensing_info()
 }
 

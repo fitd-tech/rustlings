@@ -1,9 +1,24 @@
+/*
+    Hint
+    Notice how the trait takes ownership of `self` and returns `Self`.
+
+    Although the signature of `append_bar` in the trait takes `self` as argument,
+    the implementation can take `mut self` instead. This is possible because the
+    the value is owned anyway.
+*/
+
 trait AppendBar {
     fn append_bar(self) -> Self;
 }
 
 // TODO: Implement the trait `AppendBar` for a vector of strings.
 // `append_bar` should push the string "Bar" into the vector.
+impl AppendBar for Vec<String> {
+    fn append_bar(mut self) -> Self {
+        self.push(String::from("Bar"));
+        self
+    }
+}
 
 fn main() {
     // You can optionally experiment here.

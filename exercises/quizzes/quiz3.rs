@@ -11,15 +11,30 @@
 // Make the necessary code changes in the struct `ReportCard` and the impl
 // block to support alphabetical report cards in addition to numerical ones.
 
+/*
+    Hint
+    To find the best solution to this challenge, you need to recall your knowledge
+    of traits, specifically "Trait Bound Syntax":
+    https://doc.rust-lang.org/book/ch10-02-traits.html#trait-bound-syntax
+
+    Here is how to specify a trait bound for an implementation block:
+    `impl<T: Trait1 + Trait2 + …> for Foo<T> { … }`
+
+    You may need this:
+    `use std::fmt::Display;`
+*/
+
+use std::fmt::Display;
+
 // TODO: Adjust the struct as described above.
-struct ReportCard {
-    grade: f32,
+struct ReportCard<T> {
+    grade: T,
     student_name: String,
     student_age: u8,
 }
 
 // TODO: Adjust the impl block as described above.
-impl ReportCard {
+impl<T: Display> ReportCard<T> {
     fn print(&self) -> String {
         format!(
             "{} ({}) - achieved a grade of {}",
