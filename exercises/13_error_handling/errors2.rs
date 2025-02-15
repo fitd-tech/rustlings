@@ -14,6 +14,19 @@
 // There are at least two ways to implement this that are both correct. But one
 // is a lot shorter!
 
+/*
+    Hint
+    One way to handle this is using a `match` statement on
+    `item_quantity.parse::<i32>()` where the cases are `Ok(something)` and
+    `Err(something)`.
+
+    This pattern is very common in Rust, though, so there's the `?` operator that
+    does pretty much what you would make that match statement do for you!
+
+    Take a look at this section of the "Error Handling" chapter:
+    https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#a-shortcut-for-propagating-errors-the--operator
+*/
+
 use std::num::ParseIntError;
 
 fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
@@ -21,8 +34,12 @@ fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
     let cost_per_item = 5;
 
     // TODO: Handle the error case as described above.
-    let qty = item_quantity.parse::<i32>();
+    let qty = item_quantity.parse::<i32>()?;
 
+    // match qty {
+    //     Ok(_qty) => Ok(_qty * cost_per_item + processing_fee),
+    //     Err(_err) => Err(_err),
+    // }
     Ok(qty * cost_per_item + processing_fee)
 }
 

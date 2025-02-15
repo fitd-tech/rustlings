@@ -4,6 +4,20 @@
 // a custom error type to make it possible for callers to decide what to do next
 // when our function returns an error.
 
+/*
+    Hint
+    This exercise uses a completed version of `PositiveNonzeroInteger` from the
+    previous exercises.
+
+    Below the line that `TODO` asks you to change, there is an example of using
+    the `map_err()` method on a `Result` to transform one type of error into
+    another. Try using something similar on the `Result` from `parse()`. You
+    can then use the `?` operator to return early.
+
+    Read more about `map_err()` in the `std::result` documentation:
+    https://doc.rust-lang.org/std/result/enum.Result.html#method.map_err
+*/
+
 use std::num::ParseIntError;
 
 #[derive(PartialEq, Debug)]
@@ -26,6 +40,9 @@ impl ParsePosNonzeroError {
 
     // TODO: Add another error conversion function here.
     // fn from_parse_int(???) -> Self { ??? }
+    fn from_parse_int(err: ParseIntError) -> Self {
+        Self::ParseInt(err)
+    }
 }
 
 #[derive(PartialEq, Debug)]
@@ -43,7 +60,8 @@ impl PositiveNonzeroInteger {
     fn parse(s: &str) -> Result<Self, ParsePosNonzeroError> {
         // TODO: change this to return an appropriate error instead of panicking
         // when `parse()` returns an error.
-        let x: i64 = s.parse().unwrap();
+        // let x: i64 = s.parse().unwrap();
+        let x: i64 = s.parse().map_err(ParsePosNonzeroError::from_parse_int)?;
         Self::new(x).map_err(ParsePosNonzeroError::from_creation)
     }
 }
