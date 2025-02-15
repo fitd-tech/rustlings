@@ -1,9 +1,26 @@
+/*
+    Hint
+    Options can have a `Some` value, with an inner value, or a `None` value,
+    without an inner value.
+
+    There are multiple ways to get at the inner value, you can use `unwrap`, or
+    pattern match. Unwrapping is the easiest, but how do you do it safely so that
+    it doesn't panic in your face later?
+*/
+
 // This function returns how much icecream there is left in the fridge.
 // If it's before 22:00 (24-hour system), then 5 scoops are left. At 22:00,
 // someone eats it all, so no icecream is left (value 0). Return `None` if
 // `hour_of_day` is higher than 23.
 fn maybe_icecream(hour_of_day: u16) -> Option<u16> {
     // TODO: Complete the function body.
+    if hour_of_day < 22 {
+        Some(5)
+    } else if hour_of_day > 23 {
+        None
+    } else {
+        Some(0)
+    }
 }
 
 fn main() {
@@ -18,7 +35,7 @@ mod tests {
     fn raw_value() {
         // TODO: Fix this test. How do you get the value contained in the
         // Option?
-        let icecreams = maybe_icecream(12);
+        let icecreams = maybe_icecream(12).unwrap_or(0);
 
         assert_eq!(icecreams, 5); // Don't change this line.
     }
