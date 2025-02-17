@@ -1,3 +1,13 @@
+/*
+    Hint
+    In an imperative language, you might write a `for` loop that updates a mutable
+    variable. Or, you might write code utilizing recursion and a match clause. In
+    Rust, you can take another functional approach, computing the factorial
+    elegantly with ranges and iterators.
+
+    Check out the `fold` and `rfold` methods!
+*/
+
 fn factorial(num: u64) -> u64 {
     // TODO: Complete this function to return the factorial of `num` which is
     // defined as `1 * 2 * 3 * … * num`.
@@ -10,6 +20,10 @@ fn factorial(num: u64) -> u64 {
     // - additional variables
     // For an extra challenge, don't use:
     // - recursion
+    let factors = 1..num + 1;
+
+    // factors.fold(1, |acc, x| acc * x)
+    factors.product()
 }
 
 fn main() {

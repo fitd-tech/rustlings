@@ -1,3 +1,13 @@
+/*
+    Hint
+    We expect the method `Rectangle::new` to panic for negative values.
+
+    To handle that, you need to add a special attribute to the test function.
+
+    You can refer to the docs:
+    https://doc.rust-lang.org/book/ch11-01-writing-tests.html#checking-for-panics-with-should_panic
+*/
+
 struct Rectangle {
     width: i32,
     height: i32,
@@ -29,13 +39,14 @@ mod tests {
         // TODO: This test should check if the rectangle has the size that we
         // pass to its constructor.
         let rect = Rectangle::new(10, 20);
-        assert_eq!(todo!(), 10); // Check width
-        assert_eq!(todo!(), 20); // Check height
+        assert_eq!(rect.width, 10); // Check width
+        assert_eq!(rect.height, 20); // Check height
     }
 
     // TODO: This test should check if the program panics when we try to create
     // a rectangle with negative width.
     #[test]
+    #[should_panic]
     fn negative_width() {
         let _rect = Rectangle::new(-10, 10);
     }
@@ -43,6 +54,7 @@ mod tests {
     // TODO: This test should check if the program panics when we try to create
     // a rectangle with negative height.
     #[test]
+    #[should_panic]
     fn negative_height() {
         let _rect = Rectangle::new(10, -10);
     }

@@ -3,8 +3,14 @@
 // going out of scope before it is used. Remember, references are borrows and do
 // not own their own data. What if their owner goes out of scope?
 
+/*
+    Hint
+    Let the compiler guide you. Also take a look at The Book if you need help:
+    https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html
+*/
+
 // TODO: Fix the compiler error by updating the function signature.
-fn longest(x: &str, y: &str) -> &str {
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() {
         x
     } else {

@@ -4,6 +4,21 @@
 // number of exercises with a given progress. Recreate this counting
 // functionality using iterators. Try to not use imperative loops (for/while).
 
+/*
+    Hint
+    The documentation for the `std::iter::Iterator` trait contains numerous methods
+    that would be helpful here.
+
+    The `collection` variable in `count_collection_iterator` is a slice of
+    `HashMap`s. It needs to be converted into an iterator in order to use the
+    iterator methods.
+
+    The `fold` method can be useful in the `count_collection_iterator` function.
+
+    For a further challenge, consult the documentation for `Iterator` to find
+    a different method that could make your code more compact than using `fold`.
+*/
+
 use std::collections::HashMap;
 
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -28,6 +43,8 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
     // `map` is a hash map with `String` keys and `Progress` values.
     // map = { "variables1": Complete, "from_str": None, … }
+    let map_iterator = map.iter();
+    map_iterator.filter(|&x| *x.1 == value).count()
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -48,6 +65,11 @@ fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Pr
     // `collection` is a slice of hash maps.
     // collection = [{ "variables1": Complete, "from_str": None, … },
     //               { "variables2": Complete, … }, … ]
+    let collection_iterator = collection.iter();
+    collection_iterator
+        .flatten()
+        .filter(|&x| *x.1 == value)
+        .count()
 }
 
 fn main() {

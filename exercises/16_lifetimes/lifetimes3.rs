@@ -1,9 +1,14 @@
 // Lifetimes are also needed when structs hold references.
 
+/*
+    Hint
+    Let the compiler guide you :)
+*/
+
 // TODO: Fix the compiler errors about the struct.
-struct Book {
-    author: &str,
-    title: &str,
+struct Book<'a> {
+    author: &'a str,
+    title: &'a str,
 }
 
 fn main() {

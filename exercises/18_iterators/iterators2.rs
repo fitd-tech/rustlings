@@ -1,13 +1,40 @@
 // In this exercise, you'll learn some of the unique advantages that iterators
 // can offer.
 
+/*
+    Hint
+    `capitalize_first`:
+
+    The variable `first` is a `char`. It needs to be capitalized and added to the
+    remaining characters in `chars` in order to return the correct `String`.
+
+    The remaining characters in `chars` can be viewed as a string slice using the
+    `as_str` method.
+
+    The documentation for `char` contains many useful methods.
+    https://doc.rust-lang.org/std/primitive.char.html
+
+    Use `char::to_uppercase`. It returns an iterator that can be converted to a
+    `String`.
+
+    `capitalize_words_vector`:
+
+    Create an iterator from the slice. Transform the iterated values by applying
+    the `capitalize_first` function. Remember to `collect` the iterator.
+
+    `capitalize_words_string`:
+
+    This is surprisingly similar to the previous solution. `collect` is very
+    powerful and very general. Rust just needs to know the desired type.
+*/
+
 // TODO: Complete the `capitalize_first` function.
 // "hello" -> "Hello"
 fn capitalize_first(input: &str) -> String {
     let mut chars = input.chars();
     match chars.next() {
         None => String::new(),
-        Some(first) => todo!(),
+        Some(first) => first.to_uppercase().to_string() + chars.as_str(),
     }
 }
 
@@ -16,6 +43,8 @@ fn capitalize_first(input: &str) -> String {
 // ["hello", "world"] -> ["Hello", "World"]
 fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
     // ???
+    let words_iterator = words.iter();
+    words_iterator.map(|word| capitalize_first(word)).collect()
 }
 
 // TODO: Apply the `capitalize_first` function again to a slice of string
@@ -23,6 +52,8 @@ fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
 // ["hello", " ", "world"] -> "Hello World"
 fn capitalize_words_string(words: &[&str]) -> String {
     // ???
+    let words_iterator = words.iter();
+    words_iterator.map(|word| capitalize_first(word)).collect()
 }
 
 fn main() {

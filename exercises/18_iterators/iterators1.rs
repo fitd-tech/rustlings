@@ -2,6 +2,13 @@
 // essential. This module helps you get familiar with the structure of using an
 // iterator and how to go through elements within an iterable collection.
 
+/*
+    Hint
+    An iterator goes through all elements in a collection, but what if we've run
+    out of elements? What should we expect here? If you're stuck, take a look at
+    https://doc.rust-lang.org/std/iter/trait.Iterator.html
+*/
+
 fn main() {
     // You can optionally experiment here.
 }
@@ -13,13 +20,13 @@ mod tests {
         let my_fav_fruits = ["banana", "custard apple", "avocado", "peach", "raspberry"];
 
         // TODO: Create an iterator over the array.
-        let mut fav_fruits_iterator = todo!();
+        let mut fav_fruits_iterator = my_fav_fruits.iter();
 
         assert_eq!(fav_fruits_iterator.next(), Some(&"banana"));
-        assert_eq!(fav_fruits_iterator.next(), todo!()); // TODO: Replace `todo!()`
+        assert_eq!(fav_fruits_iterator.next(), Some(&"custard apple")); // TODO: Replace `todo!()`
         assert_eq!(fav_fruits_iterator.next(), Some(&"avocado"));
-        assert_eq!(fav_fruits_iterator.next(), todo!()); // TODO: Replace `todo!()`
+        assert_eq!(fav_fruits_iterator.next(), Some(&"peach")); // TODO: Replace `todo!()`
         assert_eq!(fav_fruits_iterator.next(), Some(&"raspberry"));
-        assert_eq!(fav_fruits_iterator.next(), todo!()); // TODO: Replace `todo!()`
+        assert_eq!(fav_fruits_iterator.next(), None); // TODO: Replace `todo!()`
     }
 }
