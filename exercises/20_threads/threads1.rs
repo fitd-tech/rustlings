@@ -3,6 +3,21 @@
 // wait until all the spawned threads have finished and should collect their
 // return values into a vector.
 
+/*
+    Hint
+    `JoinHandle` is a struct that is returned from a spawned thread:
+    https://doc.rust-lang.org/std/thread/fn.spawn.html
+
+    A challenge with multi-threaded applications is that the main thread can
+    finish before the spawned threads are done.
+    https://doc.rust-lang.org/book/ch16-01-threads.html#waiting-for-all-threads-to-finish-using-join-handles
+
+    Use the `JoinHandle`s to wait for each thread to finish and collect their
+    results.
+
+    https://doc.rust-lang.org/std/thread/struct.JoinHandle.html
+*/
+
 use std::{
     thread,
     time::{Duration, Instant},
@@ -24,6 +39,7 @@ fn main() {
     for handle in handles {
         // TODO: Collect the results of all threads into the `results` vector.
         // Use the `JoinHandle` struct which is returned by `thread::spawn`.
+        results.push(handle.join().unwrap());
     }
 
     if results.len() != 10 {

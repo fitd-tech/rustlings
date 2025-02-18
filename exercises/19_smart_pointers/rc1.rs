@@ -3,6 +3,22 @@
 // multiple `Planet`s. The planets take ownership of the sun, indicating that
 // they revolve around the sun.
 
+/*
+    Hint
+    This is a straightforward exercise to use the `Rc<T>` type. Each `Planet` has
+    ownership of the `Sun`, and uses `Rc::clone()` to increment the reference count
+    of the `Sun`.
+
+    After using `drop()` to move the `Planet`s out of scope individually, the
+    reference count goes down.
+
+    In the end, the `Sun` only has one reference again, to itself.
+
+    See more at: https://doc.rust-lang.org/book/ch15-04-rc.html
+
+    Unfortunately, Pluto is no longer considered a planet :(
+*/
+
 use std::rc::Rc;
 
 #[derive(Debug)]
@@ -60,17 +76,17 @@ mod tests {
         jupiter.details();
 
         // TODO
-        let saturn = Planet::Saturn(Rc::new(Sun));
+        let saturn = Planet::Saturn(Rc::clone(&sun));
         println!("reference count = {}", Rc::strong_count(&sun)); // 7 references
         saturn.details();
 
         // TODO
-        let uranus = Planet::Uranus(Rc::new(Sun));
+        let uranus = Planet::Uranus(Rc::clone(&sun));
         println!("reference count = {}", Rc::strong_count(&sun)); // 8 references
         uranus.details();
 
         // TODO
-        let neptune = Planet::Neptune(Rc::new(Sun));
+        let neptune = Planet::Neptune(Rc::clone(&sun));
         println!("reference count = {}", Rc::strong_count(&sun)); // 9 references
         neptune.details();
 
@@ -92,12 +108,15 @@ mod tests {
         println!("reference count = {}", Rc::strong_count(&sun)); // 4 references
 
         // TODO
+        drop(earth);
         println!("reference count = {}", Rc::strong_count(&sun)); // 3 references
 
         // TODO
+        drop(venus);
         println!("reference count = {}", Rc::strong_count(&sun)); // 2 references
 
         // TODO
+        drop(mercury);
         println!("reference count = {}", Rc::strong_count(&sun)); // 1 reference
 
         assert_eq!(Rc::strong_count(&sun), 1);

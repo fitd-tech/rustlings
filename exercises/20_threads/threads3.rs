@@ -1,3 +1,18 @@
+/*
+    Hint
+    An alternate way to handle concurrency between threads is to use an `mpsc`
+    (multiple producer, single consumer) channel to communicate.
+
+    With both a sending end and a receiving end, it's possible to send values in
+    one thread and receive them in another.
+
+    Multiple producers are possible by using `clone()` to create a duplicate of the
+    original sending end.
+
+    Related section in The Book:
+    https://doc.rust-lang.org/book/ch16-02-message-passing.html
+*/
+
 use std::{sync::mpsc, thread, time::Duration};
 
 struct Queue {
@@ -17,10 +32,12 @@ impl Queue {
 fn send_tx(q: Queue, tx: mpsc::Sender<u32>) {
     // TODO: We want to send `tx` to both threads. But currently, it is moved
     // into the first thread. How could you solve this problem?
+    let tx_first = tx.clone();
+
     thread::spawn(move || {
         for val in q.first_half {
             println!("Sending {val:?}");
-            tx.send(val).unwrap();
+            tx_first.send(val).unwrap();
             thread::sleep(Duration::from_millis(250));
         }
     });

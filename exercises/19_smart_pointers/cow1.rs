@@ -3,6 +3,15 @@
 // lazily when mutation or ownership is required. The type is designed to work
 // with general borrowed data via the `Borrow` trait.
 
+/*
+    Hint
+    If `Cow` already owns the data, it doesn't need to clone it when `to_mut()` is
+    called.
+
+    Check out the documentation of the `Cow` type:
+    https://doc.rust-lang.org/std/borrow/enum.Cow.html
+*/
+
 use std::borrow::Cow;
 
 fn abs_all(input: &mut Cow<[i32]>) {
@@ -39,7 +48,7 @@ mod tests {
         let mut input = Cow::from(&vec);
         abs_all(&mut input);
         // TODO: Replace `todo!()` with `Cow::Owned(_)` or `Cow::Borrowed(_)`.
-        assert!(matches!(input, todo!()));
+        assert!(matches!(input, Cow::Borrowed(_)));
     }
 
     #[test]
@@ -52,7 +61,7 @@ mod tests {
         let mut input = Cow::from(vec);
         abs_all(&mut input);
         // TODO: Replace `todo!()` with `Cow::Owned(_)` or `Cow::Borrowed(_)`.
-        assert!(matches!(input, todo!()));
+        assert!(matches!(input, Cow::Owned(_)));
     }
 
     #[test]
@@ -64,6 +73,6 @@ mod tests {
         let mut input = Cow::from(vec);
         abs_all(&mut input);
         // TODO: Replace `todo!()` with `Cow::Owned(_)` or `Cow::Borrowed(_)`.
-        assert!(matches!(input, todo!()));
+        assert!(matches!(input, Cow::Owned(_)));
     }
 }
